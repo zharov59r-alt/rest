@@ -26,7 +26,7 @@ public class MyConfig {
         try {
 
             dataSource.setDriverClass("org.postgresql.Driver");
-            dataSource.setJdbcUrl("jdbc:postgresql://10.241.29.52:5432/java?useSSL=false&amp;serverTimezone=UTC");
+            dataSource.setJdbcUrl("jdbc:postgresql://10.241.29.52:5432/java?useSSL=false&serverTimezone=UTC");
             dataSource.setUser("postgres");
             dataSource.setPassword("KxfOwrJY3V");
         }
