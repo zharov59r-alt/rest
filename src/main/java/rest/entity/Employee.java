@@ -2,6 +2,7 @@ package rest.entity;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "employee", schema = "public")
@@ -13,9 +14,11 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "s_employee_id")
     private Long id;
 
+    @NotEmpty
     @Column(name = "employee_name", columnDefinition = "text", nullable = false)
     private String name;
 
+    @NotEmpty
     @Column(name = "employee_surname", columnDefinition = "text", nullable = false)
     private String surname;
 

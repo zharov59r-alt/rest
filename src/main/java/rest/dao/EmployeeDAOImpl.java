@@ -1,5 +1,6 @@
 package rest.dao;
 
+import lombok.extern.slf4j.Slf4j;
 import rest.entity.Employee;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Slf4j
 @Repository
 public class EmployeeDAOImpl implements EmployeeDAO {
 
@@ -22,9 +24,17 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
     @Override
-    public void saveEmployee(Employee employee) {
+    public Employee insertEmployee(Employee employee) {
+        Session session = sessionFactory.getCurrentSession();
+        session.persist(employee);
+        return employee;
+    }
+
+    @Override
+    public Employee updateEmployee(Employee employee) {
         Session session = sessionFactory.getCurrentSession();
         session.merge(employee);
+        return employee;
     }
 
     @Override
@@ -37,9 +47,13 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     @Override
     public void removeEmployee(Long employeeId) {
         Session session = sessionFactory.getCurrentSession();
+
+        log.info("EmployeeDAOImpl.removeEmployee begin");
         session.createMutationQuery("delete from Employee where id = :employee_id")
                 .setParameter("employee_id", employeeId)
                 .executeUpdate();
+
+        log.info("EmployeeDAOImpl.removeEmployee begin");
     }
 
 }
